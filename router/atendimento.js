@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const dateFormat = require('dateformat');
 const dataBase = require("../database/database");
 
 router.post("/atendimento", (req, res) => {

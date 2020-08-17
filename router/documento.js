@@ -14,9 +14,9 @@ router.get("/documento", (req, res) => {
         res.json({ documento })
         dataBase.raw("update empresa set cont_fluxo=cont_fluxo+1  where fantasia='EMPRESA A' ")
         .then((result) => {
-            //res.sendStatus(200)
+            res.sendStatus(200)
         }).catch(err => {
-            //res.sendStatus(400)
+            res.sendStatus(400)
         })
     
     }).catch(err => {

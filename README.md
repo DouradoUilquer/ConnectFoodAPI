@@ -1,2 +1,2 @@
 # ConnectFoodAPI
-# API para consumo de Aplicação Mobile com Integração os Sistema Connect Food
+# API para consumo de Aplicação Mobile, para Integração ao Sistema Connect Food

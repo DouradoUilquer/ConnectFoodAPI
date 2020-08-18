@@ -3,7 +3,7 @@ const router = express.Router();
 const dataBase = require("../database/database");
 
 router.post("/atendimento", (req, res) => {
-    var { empresa, documento, maquina, cliente, vendedor, operador, NfSerie, NfModelo, NfNatureza, mesa } = req.body
+    var { empresa, documento, maquina, cliente, vendedor, operador, NfSerie, NfModelo, NfNatureza, mesa, pessoas } = req.body
     now = new Date;
     dataBase('fluxo').insert({
         empresa: empresa,
@@ -29,7 +29,7 @@ router.post("/atendimento", (req, res) => {
             cliente: cliente,
             data: now,
             data_abertura: now,
-            pessoas: 2
+            pessoas: pessoas
         }).then((result) => {
             res.sendStatus(200)
         }).catch((erro) => {

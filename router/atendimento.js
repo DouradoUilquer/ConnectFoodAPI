@@ -20,7 +20,21 @@ router.post("/atendimento", (req, res) => {
         data_abertura: now,
         comanda_mesa: mesa
     }).then((result) => {
-        res.send(result)
+        var idFluxo = result[0]
+        dataBase('comanda_mesa').where('mesa_comanda', mesa).update({
+            id_fluxo: idFluxo,
+            empresa: empresa,
+            documento: documento,
+            garcom: vendedor,
+            cliente: cliente,
+            data: now,
+            data_abertura: now,
+            pessoas: 2
+        }).then((result) => {
+            res.sendStatus(200)
+        }).catch((erro) => {
+            res.sendStatus(400)
+        })
     }).catch((erro) => {
         res.sendStatus(400)
     })

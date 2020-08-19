@@ -15,6 +15,7 @@ const Vendas = require("./router/Vendas")
 const Categoria = require("./router/Categoria")
 const Documento = require("./router/documento")
 const Atendimento = require("./router/atendimento")
+const AtendimentoProduto = require("./router/atendimentoProduto")
 
 
 app.use("/", Estoque)
@@ -24,6 +25,7 @@ app.use("/", Vendas)
 app.use("/", Categoria)
 app.use("/", Documento)
 app.use("/", Atendimento)
+app.use("/", AtendimentoProduto)
 
 
 app.listen(3000, () => {

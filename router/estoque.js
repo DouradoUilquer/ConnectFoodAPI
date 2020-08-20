@@ -21,8 +21,8 @@ router.post("/estoque", (req, res) => {
     })
 })
 
-//ATUALIZAR SALDO DO ESTOQUE
-router.put("/estoque", (req, res) => {
+//ATUALIZAR SALDO DO ESTOQUE DOWN
+router.put("/estoque-down", (req, res) => {
     var itens = req.body;
     const itensJson = itens
     const quantidade = itensJson.length;
@@ -41,5 +41,28 @@ router.put("/estoque", (req, res) => {
     }
     res.sendStatus(200)
 })
+
+//ATUALIZAR SALDO DO ESTOQUE UP
+router.put("/estoque-up", (req, res) => {
+    var itens = req.body;
+    const itensJson = itens
+    const quantidade = itensJson.length;
+    let contador = 0;
+
+    while (contador < quantidade) {
+
+        var idEstoque = itensJson[contador].id_estoque
+        var qtde = itensJson[contador].quantidade
+
+        dataBase.raw("update estoque set saldo=saldo+'" + qtde + "' where id_estoque='" + idEstoque + "' and tipo='PRODUTO'").then(() => {
+        }).catch(err => {
+            console.log(err)
+        })
+        contador++;
+    }
+    res.sendStatus(200)
+})
+
+
 
 module.exports = router;

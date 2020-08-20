@@ -3,6 +3,7 @@ const router = express.Router();
 const dataBase = require("../database/database");
 const dateFormat = require('dateformat');
 
+//INCLUIR LISTA DE PRODUTOS
 router.post("/atendimento-produto", (req, res) => {
     var itens = req.body;
     const itensJson = itens
@@ -11,9 +12,8 @@ router.post("/atendimento-produto", (req, res) => {
     var now = new Date();
     dateFormat.masks.hammerTime = 'yyyy-mm-dd';
 
-
     while (contador < quantidade) {
-        
+
         var idEstoque = itensJson[contador].id_estoque
         var idFluxo = itensJson[contador].id_fluxo
         var documento = itensJson[contador].documento
@@ -37,6 +37,18 @@ router.post("/atendimento-produto", (req, res) => {
     res.sendStatus(200)
 })
 
+
+//EXCLUIR LISTA DE PRODUTOS
+router.delete("/atendimento-produto", (req, res) => {
+    var { documento } = req.body
+    dataBase('fluxoprod').where('documento', documento).del()
+        .then((result) => {
+            res.sendStatus(200)
+        }).catch((erro) => {
+            console.log(erro)
+            res.sendStatus(404)
+        })
+})
 
 
 module.exports = router;

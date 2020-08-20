@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const dataBase = require("../database/database");
 
+
+//INCLUIR ATENDIMENTO E ATUALIZAR STATUS DA MESA
 router.post("/atendimento", (req, res) => {
     var { empresa, documento, maquina, cliente, vendedor, operador, NfSerie, NfModelo, NfNatureza, mesa, pessoas } = req.body
     now = new Date;
@@ -39,6 +41,20 @@ router.post("/atendimento", (req, res) => {
         res.sendStatus(400)
     })
 })
+
+//EXCLUIR ATENDIMENTO
+router.delete("/atendimento", (req, res) => {
+    var { documento, mesa } = req.body
+    dataBase('fluxo').where('documento', documento).where('comanda_mesa', mesa).del()
+        .then((result) => {
+            res.sendStatus(200)
+        }).catch((erro) => {
+            console.log(erro)
+            res.sendStatus(404)
+        })
+
+})
+
 
 
 
